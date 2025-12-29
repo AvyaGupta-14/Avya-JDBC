@@ -19,7 +19,7 @@ public interface EmployeeDao {
 	
 	public List<Employee> getAllEmps() throws SQLException;
 	
-	public void printAllEmps();
+	public void printAllEmps() throws SQLException;
 	
 
 }

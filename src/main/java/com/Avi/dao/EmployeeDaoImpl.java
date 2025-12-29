@@ -2,6 +2,7 @@ package com.Avi.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -13,6 +14,8 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	private static final String INSERT_QUERY = "INSERT INTO EMPLOYEE (ID , NAME, GENDER, SALARY) VALUES(%d,'%s','%s',%d)";
 	private static final String UPDATE_QUERY = "UPDATE EMPLOYEE SET NAME = '%s' , GENDER = '%s', SALARY= %d WHERE ID = %d";
 	private static final String DELETE_QUERY ="DELETE FROM EMPLOYEE WHERE ID = %d";
+	private static final String SELECT_QUERY = "SELECT * FROM EMPLOYEE";
+
 
 	
 	static Connection connection = null;
@@ -54,19 +57,35 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		statement.executeUpdate(String.format(DELETE_QUERY,id));
 		System.out.println(String.format(DELETE_QUERY,id));
 		
+		
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Employee getEmpById(int id) {
-		// TODO Auto-generated method stub
+	public Employee getEmpById(int id) throws SQLException{
+		Statement statement = connection.createStatement();
+//		statement.executeQuery(SELECT_QUERY);
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM EMPLOYEE WHERE ID=%d");
+
+		while (resultSet.next()) {
+			System.out.println("ID = " + resultSet.getInt(1) + "\t NAME = " + resultSet.getString(2) + "\t GENDER = "
+					+ resultSet.getString(3) + "\t SALARY = " + resultSet.getInt(4));
+		}
+
 		return null;
 	}
 
 	@Override
-	public Employee getEmpByName(String name) {
-		// TODO Auto-generated method stub
+	public Employee getEmpByName(String name) throws SQLException{
+		Statement statement = connection.createStatement();
+//		statement.executeQuery(SELECT_QUERY);
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM EMPLOYEE WHERE ID='%s'");
+
+		while (resultSet.next()) {
+			System.out.println("ID = " + resultSet.getInt(1) + "\t NAME = " + resultSet.getString(2) + "\t GENDER = "
+					+ resultSet.getString(3) + "\t SALARY = " + resultSet.getInt(4));
+		}
 		return null;
 	}
 
@@ -77,9 +96,15 @@ public class EmployeeDaoImpl implements EmployeeDao{
 	}
 
 	@Override
-	public void printAllEmps() {
-		// TODO Auto-generated method stub
-		
+	public void printAllEmps() throws SQLException{
+		Statement statement = connection.createStatement();
+//		statement.executeQuery(SELECT_QUERY);
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM EMPLOYEE");
+
+		while (resultSet.next()) {
+			System.out.println("ID = " + resultSet.getInt(1) + "\t NAME = " + resultSet.getString(2) + "\t GENDER = "
+					+ resultSet.getString(3) + "\t SALARY = " + resultSet.getInt(4));
+		}
 	}
 
 }
