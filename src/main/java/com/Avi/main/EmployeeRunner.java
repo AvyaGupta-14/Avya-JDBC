@@ -18,7 +18,9 @@ public class EmployeeRunner {
 		//edao.saveEmp(emp);
 		//edao.updateEmp(emp);
 		//edao.deleteEmpById(12);
-		edao.printAllEmps();
+		//edao.printAllEmps();
+		//edao.getEmpById(8);
+		edao.getEmpByName("Avya");
 		System.out.println("Query executed...............");
 
 		
